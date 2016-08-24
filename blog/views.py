@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 from .models import Article, Comment
 from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Count
+
 
 # представление в виде списка статей
 class ArticlesView(ListView):
@@ -18,8 +18,7 @@ class ArticlesView(ListView):
     template_name = 'blog/article_list.html'
 
     def get_queryset(self):
-        articles = Article.objects.annotate(Count('comments')).order_by('-id')
-        
+        articles = Article.objects.all().order_by('-id')
         # разбивка на страницы по 5 статей
         paginator = Paginator(articles, 5)
         page = self.request.GET.get('page')
@@ -29,7 +28,6 @@ class ArticlesView(ListView):
             articles = paginator.page(1)
         except EmptyPage:
             articles = paginator.page(paginator.num_pages)
-        #articles.object_list.annotate(Count('comments'))
         return articles
 
 
@@ -62,7 +60,7 @@ def add_comment(request, article_id):
 
 # фильтрация по тегу
 def tags(request, tag):
-    articles_with_tag = (Article.objects.filter(tags__name__in=[tag]).annotate(Count('comments'))
+    articles_with_tag = (Article.objects.filter(tags__name__in=[tag])
                                         .order_by('-id'))
     return render(request, 'blog/article_list.html',
                   {'object_list': articles_with_tag})
