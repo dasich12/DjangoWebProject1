@@ -37,12 +37,13 @@
                 {# обрезанный текст #}
                 <p>{{ article.articleContent|truncatechars:300}}</p>
                 {# количество комментариев #}
-                Комментарии: {{ article.comments.count }}
-
-                {# тэги #}    
+                {#Комментарии: {{ article.comments.count }}#}
+                Комментарии: {{ article.comments__count }}
+                {# тэги  #}
                 {% include "blog/tag_list.html" %}
+
                 {# ссылка на статью #}
-                <p class="post__more text-right"><a href="{{ article.get_absolute_url }}"  class="btn btn-primary btn-sm">Читать</a></p>
+                <p class="post__more text-right"><a href="{% url 'blog:article_detail' article.id %}"  class="btn btn-primary btn-sm">Читать</a></p>
              </div>
          </div>           
     {% empty %}
