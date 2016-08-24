@@ -1,0 +1,16 @@
+﻿{# форма добавления комментария #}
+<form id="SendComment" action="">
+<p>
+{% csrf_token %}
+</p>
+<h4>Комментировать:</h4>
+<p><small>заголовок / имя :</small> <br />
+    <input type="text" name="caption" id="caption" value="" style ="width: 50%"/>
+</p>
+<p><small>Комментарий :</small> <br />
+    <textarea name="commentText" id="commentText" style ="width: 100%;height: 100px;" rows="10" cols="50"> </textarea>
+</p>
+<p>
+<input type="submit" value="Добавить комментарий" />
+</p>
+</form>

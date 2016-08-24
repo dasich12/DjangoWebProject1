@@ -1,0 +1,45 @@
+﻿{% extends 'blog/base.html' %}
+
+
+{# js подгрузка и отправка комментариев #}
+{% block addjs %}
+{% load static %}
+<script type="text/javascript" src="{% static 'blog/main.js' %}"></script>
+{% endblock %}
+
+
+{# основной блок #}
+{% block content %}
+<table>
+    <tr><td>
+
+    {# вывод заголовка, даты, контента #}
+    <h2>{{ article.title }}</h2>
+    <div class ="articleContent" >
+    <p>{{ article.articleContent }}</p>
+    </div>
+    </td></tr>
+
+    
+    <tr><td>
+        <div class="post__time">{{ article.pub_date }}</div>  
+
+        {# вывод блока тэгов #}  
+        {% include "blog/tag_list.html" %}
+    </td></tr>
+
+    {# вывод блока загрузки #}
+    <tr><td>
+    {% load static %}
+    <div id="loading"><img src="{% static 'blog/loading-animation.gif' %}" alt="загрузка" /></div>
+
+    {# вывод блока комментариев #}
+    <div id="comments"> </div>
+    </td></tr>
+    <tr><td>
+
+    {# форма добавления комментария #}
+    {% include "blog/add_comment.html" %}
+    </td></tr>
+</table>
+{% endblock %}

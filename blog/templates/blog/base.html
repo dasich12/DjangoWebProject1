@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="windows-1251"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Блог</title>
+
+        {% load static %}        
+        <link type="text/css" href="{% static 'blog/bootstrap/css/bootstrap.css' %}" rel="stylesheet" />
+        <link type="text/css" href="{% static 'blog/bootstrap.min.css' %}" rel="stylesheet" />
+        <style type="text/css">
+            body {
+                padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+            }
+        </style>
+        
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+        <script type="text/javascript" src="{% static 'blog/jquery-1.11.2.min.js' %}"></script>
+        
+        {# Блок для загрузки js #}     
+        {% block addjs %}Empty page{% endblock %}
+        
+        <link type="text/css" href="{% static 'blog/style.css' %}" rel="stylesheet" />
+
+        <style type="text/css">
+            .post__time {           
+                background: url({% static 'blog/post__time.png' %}) left no-repeat;
+            }                        
+        </style>    
+
+
+    </head>
+<body>
+
+{# шапка #}
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <div class="brand">Новостной блог</div>
+            <ol class="nav" style="margin: 5px 0 0 0">
+                <li><a href="{% url 'blog:list' %}" class="toMain">На главную</a></li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+{# основной блок #}
+<div class="container">
+     {% block content %}Empty page{% endblock %}
+</div> 
+
+</body>
+</html>

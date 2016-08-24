@@ -1,0 +1,24 @@
+﻿{# вывод блока комментариев #}
+{% for comment in article.comments.all %}
+<div class="comments">
+    <ul class="media-list">    
+      <li class="media">        
+        <div class="media-body">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <div class="caption">{{ comment.caption }}</div>
+              <div class="metadata">
+                <span class="date">{{ comment.pub_date }}</span>
+              </div> 
+            </div>
+            <div class="panel-body">
+              <div class="media-text text-justify">{{ comment.commentText|linebreaks }}</div>                
+            </div>
+          </div>
+        </div> 
+       </li>             
+    </ul>
+</div>
+{% empty %}
+    <p>Комментариев нет</p>
+{% endfor %}

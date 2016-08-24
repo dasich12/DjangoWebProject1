@@ -1,0 +1,55 @@
+﻿{% extends 'blog/base.html' %}
+
+{# js обработка клика на элемент статьи#}
+{% block addjs %}
+<script type="text/javascript" >
+    $(function () {
+        $(".post_list").click(function (event) {
+            var thit = $(this);
+            var target = thit.find("a.btn").attr("href");
+            t = event.target || event.srcElement;
+            if (target && t.tagName != "A") {
+                window.location = target;
+            }
+            else {
+                window.location = event.target
+            }
+            return false;
+        });
+    });
+</script>
+{% endblock %}
+
+{# основной блок #}
+{% block content %}
+
+    {# переключатель страниц #}
+    {% include "blog/pagination.html" %}
+    
+    {# вывод статей текущей страницы #}
+    {% for article in object_list %}
+
+        {# статья #}
+        <div class="post post_list">
+            <div class="post__time">{{ article.pub_date }}</div>
+            <div class="post__title">{{ article.title }}</div>
+            <div class="post__entry">
+                {# обрезанный текст #}
+                <p>{{ article.articleContent|truncatechars:300}}</p>
+                {# количество комментариев #}
+                Комментарии: {{ article.comments.count }}
+
+                {# тэги #}    
+                {% include "blog/tag_list.html" %}
+                {# ссылка на статью #}
+                <p class="post__more text-right"><a href="{{ article.get_absolute_url }}"  class="btn btn-primary btn-sm">Читать</a></p>
+             </div>
+         </div>           
+    {% empty %}
+    <p>Нет постов</p>
+    {% endfor %}
+
+    {# переключатель страниц #}
+    {% include "blog/pagination.html" %}
+
+{% endblock %}

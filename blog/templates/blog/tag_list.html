@@ -1,0 +1,8 @@
+﻿{# тэги #}    
+    {% if article.tags %}
+        <p>Тэги: 
+        {% for tag in article.tags.all %}
+            <a href="{% url 'blog:article_tags' tag%}">{{tag}}</a>{% if not forloop.last %},{% endif%}        
+        {% endfor %}
+        </p>
+    {% endif %}
