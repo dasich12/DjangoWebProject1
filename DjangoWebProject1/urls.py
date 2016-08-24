@@ -13,4 +13,5 @@ urlpatterns = [
     # приложение blog/
     url(r'^blog/', include('blog.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^csvtest/', include('csvtest.urls')),
     ]

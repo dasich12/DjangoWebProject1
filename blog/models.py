@@ -1,6 +1,7 @@
-from django.db import models
+﻿from django.db import models
 from django.utils import timezone
 from taggit.managers import TaggableManager
+from django.core.urlresolvers import reverse
 
 
 # Create your models here.
@@ -14,7 +15,7 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return "/blog/%i/" % self.id
+        return reverse('blog:article_detail', args=[str(self.id)])
 
     # заполнение даты при сохранении
     def save(self, *args, **kwargs):
